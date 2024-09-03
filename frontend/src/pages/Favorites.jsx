@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import GlobalContext from "../context/GlobalContext";
 import RecipeList from "../components/RecipeList";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Favorites = () => {
-  const { favoritesList } = useContext(GlobalContext);
+  const { favoritesList } = useGlobalContext();
 
   return (
     <div className="py-8 container mx-auto flex flex-wrap justify-center gap-10">

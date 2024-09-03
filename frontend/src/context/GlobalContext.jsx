@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { commonSearchParam } from "../data/commonSearchParam";
 
-const GlobalContext = createContext(null);
+export const GlobalContext = createContext(null);
 
 const randomSearchParam =
   commonSearchParam[Math.floor(Math.random() * commonSearchParam.length)];
@@ -93,5 +93,3 @@ export const GlobalContextProvider = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
-
-export default GlobalContext;

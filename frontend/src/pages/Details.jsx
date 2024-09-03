@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import GlobalContext from "../context/GlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Details = () => {
   const {
@@ -8,7 +8,7 @@ const Details = () => {
     setRecipeDetails,
     handleAddToFavorites,
     favoritesList,
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
   const { id } = useParams();
   const getRecipeDetails = async () => {
     const response = await fetch(

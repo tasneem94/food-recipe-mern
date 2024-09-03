@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import GlobalContext from "../context/GlobalContext";
 import RecipeList from "../components/RecipeList";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Home = () => {
-  const { recipeList, loading, error } = useContext(GlobalContext);
+  const { recipeList, loading, error } = useGlobalContext();
   if (loading) {
     return (
       <div className="text-xl lg:text-4xl text-center font-bold">
