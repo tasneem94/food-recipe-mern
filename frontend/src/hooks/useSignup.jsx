@@ -7,7 +7,7 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signup = async (username, email, password) => {
+  const signup = async (email, username, password) => {
     const { setItem } = useLocalStorage("user");
     setIsLoading(true);
     setError(null);
@@ -15,7 +15,7 @@ export const useSignup = () => {
     const response = await fetch(`${import.meta.env.VITE_URL}/user/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ email, username, password }),
     });
     const data = await response.json();
 

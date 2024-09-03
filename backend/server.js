@@ -3,8 +3,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const favoritesRoutes = require("./routes/favorites");
 const userRoutes = require("./routes/user.js");
+const cors = require("cors");
 
+//express app
 const app = express();
+
+//cors for coonecting frontend to backend
+app.use(cors());
 
 //middleware
 app.use(express.json());

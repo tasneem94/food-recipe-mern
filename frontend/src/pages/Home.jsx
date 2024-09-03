@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <div className="py-8 container mx-auto flex flex-wrap justify-center gap-10">
       {recipeList && recipeList.length > 0 ? (
-        recipeList.map((item) => <RecipeList item={item} />)
+        recipeList.map((item) => <RecipeList key={item.id} item={item} />)
       ) : (
         <div className="text-xl lg:text-4xl text-center font-bold">
           No item found.

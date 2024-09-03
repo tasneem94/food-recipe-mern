@@ -2,7 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { DayNightBtn } from "./DayNightBtn";
 import ScrollToTopBtn from "./ScrollToTopBtn";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 const Navbar = () => {
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
   const { searchParam, setSearchParam, handleSubmit } = useGlobalContext();
   return (
     <nav className=" flex justify-between items-center py-8 container mx-auto flex-col lg:flex-row gap-5 lg:gap-0">
@@ -38,6 +42,39 @@ const Navbar = () => {
             Favorites
           </NavLink>
         </li>
+
+        {!user && (
+          <>
+            <li>
+              <NavLink
+                to={"/signup"}
+                className="text-black hover:text-gray-700 dark:text-white/90 dark:hover:text-white/80 duration-200 cursor-pointer"
+              >
+                Signup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/login"}
+                className="text-black hover:text-gray-700 dark:text-white/90 dark:hover:text-white/80 duration-200 cursor-pointer"
+              >
+                Login
+              </NavLink>
+            </li>
+          </>
+        )}
+        {user && (
+          <li>
+            <button
+              className="text-black hover:text-gray-700 dark:text-white/90 dark:hover:text-white/80 duration-200 cursor-pointer"
+              onClick={() => {
+                logout();
+              }}
+            >
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
       <div className="fixed top-8 right-4 lg:top-11 z-50">
         <DayNightBtn />
