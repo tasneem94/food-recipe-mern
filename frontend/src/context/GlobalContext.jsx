@@ -7,7 +7,7 @@ const GlobalContext = createContext(null);
 const randomSearchParam =
   commonSearchParam[Math.floor(Math.random() * commonSearchParam.length)];
 
-export const GlobalState = ({ children }) => {
+export const GlobalContextProvider = ({ children }) => {
   const [searchParam, setSearchParam] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

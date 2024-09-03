@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import GlobalContext from "../context/GlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { DayNightBtn } from "./DayNightBtn";
 import ScrollToTopBtn from "./ScrollToTopBtn";
 const Navbar = () => {
-  const { searchParam, setSearchParam, handleSubmit } =
-    useContext(GlobalContext);
+  const { searchParam, setSearchParam, handleSubmit } = useGlobalContext();
   return (
     <nav className=" flex justify-between items-center py-8 container mx-auto flex-col lg:flex-row gap-5 lg:gap-0">
       <div className="text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold tracking-wider ">
