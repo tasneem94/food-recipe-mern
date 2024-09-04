@@ -14,7 +14,7 @@ const Signup = () => {
 
   return (
     <form
-      className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md max-w-lg mx-auto mt-10"
+      className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md max-w-lg mx-auto my-10"
       onSubmit={handleSubmit}
     >
       <h3 className="text-2xl font-semibold text-gray-700 dark:text-white mb-6">
@@ -81,12 +81,17 @@ const Signup = () => {
         Sign up
       </button>
 
-      {error && <div className="mt-4 text-red-500 text-center">{error}</div>}
+      {error && (
+        <div className="mt-4 text-red-500 bg-red-200/30 dark:bg-red-900/20 p-2 rounded-md text-center">
+          {error}
+        </div>
+      )}
+
       <div className="flex items-center justify-center mt-4 text-gray-700 dark:text-gray-300">
         Already a user?{" "}
         <NavLink
           to={"/Login"}
-          className="text-black hover:text-gray-700 dark:text-white/90 dark:hover:text-white/80 duration-200 cursor-pointer mx-1"
+          className="text-green-500 hover:text-green-600 font-bold duration-200 cursor-pointer mx-1"
         >
           Login
         </NavLink>{" "}
