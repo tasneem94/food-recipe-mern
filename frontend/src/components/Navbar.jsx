@@ -47,14 +47,14 @@ const Navbar = () => {
         </NavLink>
       </div>
 
-      <form onSubmit={handleSubmit} className="relative flex items-center ">
+      <form onSubmit={handleSubmit} className="relative flex items-center">
         <input
           type="text"
           name="search"
           value={searchParam}
           onChange={(e) => setSearchParam(e.target.value)}
           placeholder="Search..."
-          className="bg-white/75 dark:bg-gray-700 px-11 py-3 rounded-full outline-none lg:w-96 shadow-lg shadow-gray-200 dark:shadow-gray-800 focus:shadow-gray-300 dark:focus:shadow-gray-900 pr-10" // Add pr-10 to provide space for the icon
+          className="bg-white/75 dark:bg-gray-700 px-11 py-3 rounded-full outline-none shadow-lg shadow-gray-200 dark:shadow-gray-800 focus:shadow-gray-300 dark:focus:shadow-gray-900 pr-10 w-20 sm:w-40 lg:w-72 xl:w-96"
         />
         {searchParam !== "" && (
           <FaTimes
@@ -103,7 +103,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to={"/login"}
-              className="bg-green-500/30 dark:bg-sky-500/40 px-2 py-1 rounded-md text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
+              className="bg-green-500/20 dark:bg-sky-500/40 px-2 py-1 rounded-md text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
             >
               Login
             </NavLink>
