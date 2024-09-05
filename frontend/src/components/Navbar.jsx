@@ -15,10 +15,12 @@ const Navbar = () => {
     handleSubmit,
     isDropdownOpen,
     setIsDropdownOpen,
+    isMenuOpen,
+    setIsMenuOpen,
     dropdownRef,
+    menuRef,
     handleClickOutside,
   } = useGlobalContext();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -30,7 +32,7 @@ const Navbar = () => {
   return (
     <nav className=" flex justify-between items-center py-8 container mx-auto flex-col md:flex-row gap-5 lg:gap-0 ">
       {/* Hamburger Icon */}
-      <div className="absolute top-8 left-4 lg:hidden">
+      <div ref={menuRef} className="absolute top-8 left-4 lg:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-2xl text-gray-900 dark:text-gray-200"
@@ -39,7 +41,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className="text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold tracking-wider">
+      <div className="text-xl md:text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold tracking-wider">
         <NavLink to={"/"} className="cursor-pointer">
           FOOD RECIPE
         </NavLink>

@@ -15,7 +15,10 @@ export const GlobalContextProvider = ({ children }) => {
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [favoritesList, setFavoritesList] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const dropdownRef = useRef(null);
+  const menuRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -77,6 +80,9 @@ export const GlobalContextProvider = ({ children }) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
     }
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -101,6 +107,9 @@ export const GlobalContextProvider = ({ children }) => {
         setIsDropdownOpen,
         dropdownRef,
         handleClickOutside,
+        isMenuOpen,
+        setIsMenuOpen,
+        menuRef,
       }}
     >
       {children}
