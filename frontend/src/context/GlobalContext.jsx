@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { commonSearchParam } from "../data/commonSearchParam";
 
@@ -14,6 +14,8 @@ export const GlobalContextProvider = ({ children }) => {
   const [recipeList, setRecipeList] = useState([]);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [favoritesList, setFavoritesList] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -69,6 +71,14 @@ export const GlobalContextProvider = ({ children }) => {
     console.log(favoritesList);
   };
 
+  const handleClickOutside = (event) => {
+    // console.log(dropdownRef.current, isDropdownOpen);
+
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
   useEffect(() => {
     fetchRecipes(randomSearchParam);
   }, []);
@@ -87,6 +97,10 @@ export const GlobalContextProvider = ({ children }) => {
         setRecipeDetails,
         favoritesList,
         handleAddToFavorites,
+        isDropdownOpen,
+        setIsDropdownOpen,
+        dropdownRef,
+        handleClickOutside,
       }}
     >
       {children}

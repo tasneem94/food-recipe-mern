@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-const ScrollToTopBtn = () => {
+export const ScrollToTopBtn = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -38,5 +38,3 @@ const ScrollToTopBtn = () => {
     </div>
   );
 };
-
-export default ScrollToTopBtn;

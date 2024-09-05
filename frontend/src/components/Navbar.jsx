@@ -1,32 +1,24 @@
-import { useState, useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { DayNightBtn } from "./DayNightBtn";
-import ScrollToTopBtn from "./ScrollToTopBtn";
-import { useLogout } from "../hooks/useLogout";
+import { DropDown } from "./DropDown";
+import { ScrollToTopBtn } from "./ScrollToTopBtn";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { FaUserCircle } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import { FaEnvelope } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
-import { FaEdit } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const { user } = useAuthContext();
-  const { logout } = useLogout();
-  const { searchParam, setSearchParam, handleSubmit } = useGlobalContext();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const navigate = useNavigate();
-
-  const handleClickOutside = (event) => {
-    console.log(dropdownRef.current, isDropdownOpen);
-
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  };
+  const {
+    searchParam,
+    setSearchParam,
+    handleSubmit,
+    isDropdownOpen,
+    setIsDropdownOpen,
+    dropdownRef,
+    handleClickOutside,
+  } = useGlobalContext();
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -84,7 +76,6 @@ const Navbar = () => {
             </NavLink>
           </li>
         )}
-
         {user && (
           <li className="relative" ref={dropdownRef}>
             <button
@@ -93,38 +84,7 @@ const Navbar = () => {
             >
               <FaUserCircle className="text-2xl" />
             </button>
-            {isDropdownOpen && (
-              <ul className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50">
-                <li className="flex items-center gap-2 px-4 py-2 text-gray-800 dark:text-gray-200 break-all duration-100">
-                  <FaUser className="text-lg flex-shrink-0" /> {user.username}
-                </li>
-                <li className="flex items-center gap-2 px-4 py-2 text-gray-800 dark:text-gray-200 duration-100">
-                  <FaEnvelope className="text-lg flex-shrink-0" /> {user.email}
-                </li>
-                <li className=" text-gray-800 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-100 duration-100 cursor-pointer">
-                  <button
-                    onClick={() => {
-                      navigate("/edit-profile");
-                      setIsDropdownOpen(false);
-                    }}
-                    className=" flex items-center gap-2 w-full text-left px-4 py-2 "
-                  >
-                    <FaEdit className="text-lg flex-shrink-0" /> Edit profile
-                  </button>
-                </li>
-                <li className=" text-gray-800 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-100 duration-100 cursor-pointer">
-                  <button
-                    onClick={() => {
-                      logout();
-                      setIsDropdownOpen(false);
-                    }}
-                    className=" flex items-center gap-2 w-full text-left px-4 py-2 "
-                  >
-                    <FaSignOutAlt className="text-lg flex-shrink-0" /> Logout
-                  </button>
-                </li>
-              </ul>
-            )}
+            <DropDown />
           </li>
         )}
       </ul>

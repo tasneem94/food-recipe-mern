@@ -77,7 +77,7 @@ const EditProfile = () => {
         className={`w-full py-2 text-white rounded-lg ${
           isLoading
             ? "bg-gray-400 cursor-not-allowed"
-            : "bg-green-500 hover:bg-green-600 focus:outline-none focus:bg-green-600"
+            : "bg-orange-500 hover:bg-orange-600 dark:bg-orange-800 dark:hover:bg-orange-700 focus:outline-none focus:bg-orange-600"
         }`}
         disabled={isLoading}
       >
