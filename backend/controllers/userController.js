@@ -37,4 +37,30 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser };
+// Edit user profile
+const editUserProfile = async (req, res) => {
+  const userId = req.user._id; //got it from middleware
+  const { email, username, password } = req.body;
+
+  try {
+    const updatedUser = await User.editProfile(userId, {
+      email,
+      username,
+      password,
+    });
+
+    // Create a new token after profile update
+    const token = createToken(updatedUser._id);
+
+    // Respond with updated user info and the new token
+    res.status(200).json({
+      username: updatedUser.username,
+      email: updatedUser.email,
+      token,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { signupUser, loginUser, editUserProfile };

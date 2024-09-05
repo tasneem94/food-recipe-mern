@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { DayNightBtn } from "./DayNightBtn";
 import ScrollToTopBtn from "./ScrollToTopBtn";
@@ -10,6 +10,7 @@ import { FaUser } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   const { user } = useAuthContext();
@@ -17,6 +18,7 @@ const Navbar = () => {
   const { searchParam, setSearchParam, handleSubmit } = useGlobalContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleClickOutside = (event) => {
     console.log(dropdownRef.current, isDropdownOpen);
@@ -40,14 +42,18 @@ const Navbar = () => {
           FOOD RECIPE
         </NavLink>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="relative flex items-center">
         <input
           type="text"
           name="search"
           value={searchParam}
           onChange={(e) => setSearchParam(e.target.value)}
           placeholder="Search Recipe..."
-          className="bg-white/75 dark:bg-slate-600  px-8 py-3 rounded-full outline-none lg:w-96 shadow-lg shadow-gray-200 dark:shadow-gray-700 focus:shadow-gray-300  dark:focus:shadow-gray-800"
+          className="bg-white/75 dark:bg-gray-700 px-8 py-3 rounded-full outline-none lg:w-96 shadow-lg shadow-gray-200 dark:shadow-gray-800 focus:shadow-gray-300 dark:focus:shadow-gray-900 pr-10" // Add pr-10 to provide space for the icon
+        />
+        <FaSearch
+          className="absolute right-5 cursor-pointer text-gray-500 dark:text-gray-300"
+          onClick={handleSubmit}
         />
       </form>
       <ul className="flex gap-5 lg:mr-3">
@@ -97,7 +103,10 @@ const Navbar = () => {
                 </li>
                 <li className=" text-gray-800 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-100 duration-100 cursor-pointer">
                   <button
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigate("/edit-profile");
+                      setIsDropdownOpen(false);
+                    }}
                     className=" flex items-center gap-2 w-full text-left px-4 py-2 "
                   >
                     <FaEdit className="text-lg flex-shrink-0" /> Edit profile

@@ -9,6 +9,13 @@ export const authReducer = (state, action) => {
       return { user: action.payload };
     case "LOGOUT":
       return { user: null };
+    case "UPDATE_PROFILE":
+      return {
+        user: {
+          ...state.user,
+          ...action.payload, // Update the user's profile with new data
+        },
+      };
     default:
       return state;
   }

@@ -86,4 +86,69 @@ userSchema.statics.login = async function (identifier, password) {
   return user;
 };
 
+// Static edit user profile method
+userSchema.statics.editProfile = async function (
+  userId,
+  { email, username, password }
+) {
+  // Validate input
+  if (!userId) {
+    throw Error("User ID must be provided");
+  }
+
+  // Find the user by ID
+  const user = await this.findById(userId);
+
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  // Check if the new email is already in use
+  if (email && (await this.findOne({ email }))) {
+    throw Error("Email already in use");
+  }
+
+  // Check if the new username is already in use
+  if (username && (await this.findOne({ username }))) {
+    throw Error("Username already in use");
+  }
+
+  // Update fields
+  if (email) {
+    if (!validator.isEmail(email)) {
+      throw Error("Email not valid");
+    }
+    user.email = email;
+  }
+
+  if (username) {
+    if (!validator.isLength(username, { min: 3, max: 25 })) {
+      throw Error("Username must be between 3 and 25 characters long");
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      throw Error(
+        "Username can only contain letters, numbers, and underscores"
+      );
+    }
+    user.username = username;
+  }
+
+  if (password) {
+    if (!validator.isStrongPassword(password)) {
+      throw Error(
+        "Password not strong enough. Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+    }
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    user.password = hash;
+  }
+
+  // Save the updated user
+  await user.save();
+
+  return user;
+};
+
 module.exports = mongoose.model("User", userSchema);
