@@ -1,16 +1,15 @@
-import ReactSwitch from "react-switch";
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
-export const DayNightBtn = () => {
-  const { setItem, getItem, removeItem } = useLocalStorage("isDarkMode");
+export const DayNightBtnAlt = () => {
+  const { setItem, getItem } = useLocalStorage("isDarkMode");
   const { isChecked, setIsChecked } = useGlobalContext();
   setIsChecked(getItem() || false);
 
-  const hanadleChecked = () => {
+  const handleToggle = () => {
     setIsChecked((prevState) => {
       const newIsChecked = !prevState;
       document.body.classList.toggle("dark", newIsChecked);
@@ -28,24 +27,11 @@ export const DayNightBtn = () => {
   }, []);
 
   return (
-    <ReactSwitch
-      checked={isChecked}
-      onChange={hanadleChecked}
-      checkedIcon={
-        <div className="flex items-center justify-center h-full">
-          <FontAwesomeIcon icon={faSun} className="text-[#FFD43B] text-lg" />
-        </div>
-      }
-      uncheckedIcon={
-        <div className="flex items-center justify-center h-full">
-          <FontAwesomeIcon icon={faMoon} className="text-[#ffdb57] text-lg" />
-        </div>
-      }
-      handleDiameter={20}
-      onHandleColor="#e0e0e0"
-      offHandleColor="#fff"
-      onColor="#71797E"
-      offColor="#A9A9A9"
-    />
+    <button onClick={handleToggle} className="text-xl">
+      <FontAwesomeIcon
+        icon={isChecked ? faSun : faMoon}
+        className={`${isChecked ? "text-[#FFD43B]" : "text-[#F4C430]"}`}
+      />
+    </button>
   );
 };

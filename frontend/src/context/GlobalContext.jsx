@@ -16,6 +16,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [favoritesList, setFavoritesList] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const dropdownRef = useRef(null);
   const menuRef = useRef(null);
@@ -110,6 +111,8 @@ export const GlobalContextProvider = ({ children }) => {
         isMenuOpen,
         setIsMenuOpen,
         menuRef,
+        isChecked,
+        setIsChecked,
       }}
     >
       {children}

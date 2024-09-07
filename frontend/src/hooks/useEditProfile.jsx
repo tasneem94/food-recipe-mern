@@ -36,6 +36,8 @@ export const useEditProfile = () => {
       dispatch({ type: "UPDATE_PROFILE", payload: data });
 
       setIsLoading(false);
+
+      return true;
     }
   };
 

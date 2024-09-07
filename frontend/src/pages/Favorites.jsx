@@ -9,7 +9,7 @@ const Favorites = () => {
       {favoritesList && favoritesList.length > 0 ? (
         favoritesList.map((item) => <RecipeList item={item} />)
       ) : (
-        <div className="text-xl lg:text-4xl text-center font-bold">
+        <div className="mt-12 text-xl lg:text-4xl text-center font-bold">
           No favorite item found.
         </div>
       )}

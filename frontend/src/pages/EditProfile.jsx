@@ -11,8 +11,10 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await editProfile(email, username, password);
-    navigate("/");
+    const success = await editProfile(email, username, password);
+    if (success) {
+      navigate("/");
+    }
   };
 
   return (
