@@ -5,7 +5,14 @@ import { DayNightBtn } from "./DayNightBtn";
 import { DayNightBtnAlt } from "./DayNightBtnAlt";
 import { DropDown } from "./DropDown";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { FaSearch, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import {
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaUserCircle,
+  FaHome,
+  FaHeart,
+} from "react-icons/fa";
 
 const Navbar = () => {
   const { user } = useAuthContext();
@@ -117,7 +124,10 @@ const Navbar = () => {
               to={"/"}
               className="text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
             >
-              Home
+              <div className="flex flex-col justify-center items-center">
+                <FaHome className="text-2xl" />
+                <div className="text-sm">Home</div>
+              </div>
             </NavLink>
           </li>
           <li>
@@ -125,7 +135,10 @@ const Navbar = () => {
               to={"/favorites"}
               className="text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
             >
-              Favorites
+              <div className="flex flex-col justify-center items-center">
+                <FaHeart className="text-2xl" />
+                <div className="text-sm">Favorites</div>
+              </div>
             </NavLink>
           </li>
         </ul>
@@ -151,7 +164,11 @@ const Navbar = () => {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center space-x-2 text-gray-800 hover:text-gray-700 dark:text-white/90 dark:hover:text-white/80 duration-200 cursor-pointer"
                 >
-                  <FaUserCircle className="text-2xl" />
+                  <div className="flex flex-col justify-center items-center">
+                    <FaUserCircle className="text-2xl" />
+
+                    <div className="text-sm truncate hidden lg:block">User</div>
+                  </div>
                 </button>
                 <DropDown />
               </div>
@@ -190,7 +207,10 @@ const Navbar = () => {
               className="text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              <div className="flex items-center gap-2">
+                <FaHome className="text-lg" />
+                Home
+              </div>
             </NavLink>
           </li>
           <li className="mb-3">
@@ -199,7 +219,10 @@ const Navbar = () => {
               className="text-gray-800 hover:text-gray-600 dark:text-white/90 dark:hover:text-white/80 duration-100 cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
-              Favorites
+              <div className="flex items-center gap-2">
+                <FaHeart className="text-lg" />
+                Favorites
+              </div>
             </NavLink>
           </li>
         </ul>
