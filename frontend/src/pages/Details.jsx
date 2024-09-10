@@ -33,16 +33,16 @@ const Details = () => {
     getRecipeDetails();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center mt-20">
-        <ReactLoading type="spin" color="#00bfff" height={50} width={50} />
-        <p className="text-xl lg:text-2xl font-bold mt-5">
-          Loading Recipe Details... Please wait.
-        </p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center mt-20">
+  //       <ReactLoading type="spin" color="#00bfff" height={50} width={50} />
+  //       <p className="text-xl lg:text-2xl font-bold mt-5">
+  //         Loading Recipe Details... Please wait.
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="container mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
