@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
 import { useAuthContext } from "./hooks/useAuthContext";
+import UserFavorites from "./pages/UserFavorites";
 
 function App() {
   const { user } = useAuthContext();
@@ -37,7 +38,10 @@ function App() {
       <div className="px-10 lg:px-20">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/favorites"
+            element={user ? <UserFavorites /> : <Favorites />}
+          />
           <Route path="/item-details/:id" element={<Details />} />
           <Route
             path="/signup"

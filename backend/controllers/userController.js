@@ -63,4 +63,35 @@ const editUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, editUserProfile };
+// Get user favorites
+const getFavorites = async (req, res) => {
+  const userId = req.user._id; // Get the user ID from middleware
+
+  try {
+    const favorites = await User.getFavorites(userId);
+    res.status(200).json(favorites);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Toggle user favorites
+const toggleFavorite = async (req, res) => {
+  const userId = req.user._id; // Get the user ID from middleware
+  const favoriteItem = req.body; // Expecting { id, publisher, title, image_url }
+
+  try {
+    const updatedFavorites = await User.toggleFavorite(userId, favoriteItem);
+    res.status(200).json(updatedFavorites); // Return updated favorites
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  signupUser,
+  loginUser,
+  editUserProfile,
+  getFavorites,
+  toggleFavorite,
+};

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import ReactLoading from "react-loading";
+import { useToggleFavorites } from "../hooks/useToggleFavorites";
 const Details = () => {
+  const { toggleFavorites } = useToggleFavorites();
+  const { user } = useAuthContext();
   const [loading, setLoading] = useState(true);
   const {
     recipeDetails,
@@ -64,7 +68,12 @@ const Details = () => {
         </div>
         <div>
           <button
-            onClick={() => handleAddToFavorites(recipeDetails?.recipe)}
+            onClick={() => {
+              console.log(favoritesList);
+              user
+                ? toggleFavorites(recipeDetails?.recipe)
+                : handleAddToFavorites(recipeDetails?.recipe);
+            }}
             className="px-8 py-3 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white hover:bg-gray-800 dark:bg-slate-800 dark:text-white/90 dark:hover:bg-slate-900"
           >
             {favoritesList.findIndex(

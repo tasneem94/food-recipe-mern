@@ -5,6 +5,8 @@ const {
   loginUser,
   signupUser,
   editUserProfile,
+  getFavorites,
+  toggleFavorite,
 } = require("../controllers/userController");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -22,5 +24,11 @@ router.use(requireAuth);
 
 // edit route
 router.patch("/edit-profile", editUserProfile);
+
+// Get favorites route
+router.get("/favorites", getFavorites);
+
+// Toggle favorite route
+router.patch("/favorites", toggleFavorite);
 
 module.exports = router;

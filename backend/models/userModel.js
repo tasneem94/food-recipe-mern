@@ -19,7 +19,26 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  favorites: [String],
+  favorites: [
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      publisher: {
+        type: String,
+        required: true,
+      },
+      title: {
+        type: String,
+        required: true,
+      },
+      image_url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 // static signup method
@@ -150,6 +169,39 @@ userSchema.statics.editProfile = async function (
   await user.save();
 
   return user;
+};
+
+// static method to get favorites
+userSchema.statics.getFavorites = async function (userId) {
+  const user = await this.findById(userId);
+  if (!user) {
+    throw Error("User not found");
+  }
+  return user.favorites; // Return the favorites array
+};
+
+// static method to toggle favorites
+userSchema.statics.toggleFavorite = async function (userId, favoriteItem) {
+  const user = await this.findById(userId);
+  if (!user) {
+    throw Error("User not found");
+  }
+
+  // Check if the favorite item already exists
+  const itemExists = user.favorites.some((item) => item.id === favoriteItem.id);
+
+  if (itemExists) {
+    // If the item exists, remove it from the favorites
+    user.favorites = user.favorites.filter(
+      (item) => item.id !== favoriteItem.id
+    );
+  } else {
+    // If the item doesn't exist, add it to the favorites
+    user.favorites.push(favoriteItem);
+  }
+
+  await user.save();
+  return user.favorites; // Return updated favorites
 };
 
 module.exports = mongoose.model("User", userSchema);

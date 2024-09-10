@@ -16,6 +16,13 @@ export const authReducer = (state, action) => {
           ...action.payload, // Update the user's profile with new data
         },
       };
+    case "UPDATE_FAVORITES":
+      return {
+        user: {
+          ...state.user,
+          favorites: action.payload, // Update the user's favorites
+        },
+      };
     default:
       return state;
   }

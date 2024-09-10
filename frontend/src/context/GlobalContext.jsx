@@ -86,6 +86,10 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const clearFavorites = () => {
+    setFavoritesList([]);
+  };
+
   useEffect(() => {
     fetchRecipes(randomSearchParam);
   }, []);
@@ -103,7 +107,9 @@ export const GlobalContextProvider = ({ children }) => {
         recipeDetails,
         setRecipeDetails,
         favoritesList,
+        setFavoritesList,
         handleAddToFavorites,
+        clearFavorites,
         isDropdownOpen,
         setIsDropdownOpen,
         dropdownRef,
