@@ -83,7 +83,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="lg:mx-0 text-xl text-center sm:text-2xl md:text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold  sm:tracking-wider">
+        <div className="font-merriweather lg:mx-0 text-xl text-center sm:text-2xl md:text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold  md:tracking-wider">
           <NavLink to={"/"} className="cursor-pointer">
             FOOD RECIPE
           </NavLink>
@@ -183,12 +183,12 @@ const Navbar = () => {
           </li>
           <li>
             {/* This will show on small screens */}
-            <div className="block sm:hidden">
+            <div className="block md:hidden">
               <DayNightBtnAlt />
             </div>
 
             {/* This will show on screens larger than 640px (sm and above) */}
-            <div className="hidden sm:block">
+            <div className="hidden md:block">
               <DayNightBtn />
             </div>
           </li>
