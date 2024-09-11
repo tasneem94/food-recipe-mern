@@ -70,7 +70,7 @@ const UserFavorites = () => {
         favoritesList.map((item) => <RecipeList key={item.id} item={item} />)
       ) : (
         <div className="mt-12 text-xl lg:text-4xl text-center font-bold">
-          No favorite items found.
+          No favorite item found.
         </div>
       )}
     </div>

@@ -2,7 +2,7 @@ import RecipeList from "../components/RecipeList";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Favorites = () => {
-  const { favoritesList, clearFavorites } = useGlobalContext();
+  const { favoritesList } = useGlobalContext();
 
   return (
     <div className="py-8 container mx-auto flex flex-wrap justify-center gap-10">

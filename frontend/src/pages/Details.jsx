@@ -13,8 +13,36 @@ const Details = () => {
     setRecipeDetails,
     handleAddToFavorites,
     favoritesList,
+    setFavoritesList,
   } = useGlobalContext();
   const { id } = useParams();
+
+  const handleBothFavorites = () => {
+    // console.log(favoritesList);
+    if (user) {
+      // Optimistically update the favorites list locally before the backend response
+      if (
+        favoritesList.findIndex(
+          (favRecipe) => favRecipe.id === recipeDetails?.recipe.id
+        ) === -1
+      ) {
+        // Add to favorites
+        setFavoritesList((prevList) => [...prevList, recipeDetails?.recipe]);
+      } else {
+        // Remove from favorites
+        setFavoritesList((prevList) =>
+          prevList.filter(
+            (favRecipe) => favRecipe.id !== recipeDetails?.recipe.id
+          )
+        );
+      }
+      // Proceed with the backend call to toggle favorites
+      toggleFavorites(recipeDetails?.recipe);
+    } else {
+      // Handle adding to favorites when user is not logged in
+      handleAddToFavorites(recipeDetails?.recipe);
+    }
+  };
 
   const getRecipeDetails = async () => {
     setLoading(true);
@@ -68,12 +96,7 @@ const Details = () => {
         </div>
         <div>
           <button
-            onClick={() => {
-              console.log(favoritesList);
-              user
-                ? toggleFavorites(recipeDetails?.recipe)
-                : handleAddToFavorites(recipeDetails?.recipe);
-            }}
+            onClick={handleBothFavorites}
             className="px-8 py-3 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white hover:bg-gray-800 dark:bg-slate-800 dark:text-white/90 dark:hover:bg-slate-900"
           >
             {favoritesList.findIndex(
