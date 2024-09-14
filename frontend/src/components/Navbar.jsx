@@ -31,6 +31,23 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState("false");
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [title, setTitle] = useState("FOOD RECIPE");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 400) {
+        setTitle("RECIPE");
+      } else {
+        setTitle("FOOD RECIPE");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleScroll = () => {
     if (window.innerWidth < 640) {
@@ -66,7 +83,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 bg-[rgb(248,248,255)] dark:bg-black flex flex-row justify-between items-center px-10 lg:px-20 pt-8 pb-4 shadow-sm mx-auto gap-5 ${
+      className={`fixed top-0 w-full z-50 bg-[rgb(248,248,255)] dark:bg-black flex flex-row justify-between items-center px-10 lg:px-20 pt-8 pb-4 shadow-sm mx-auto ${
         showNavbar ? "transform translate-y-0" : "transform -translate-y-full"
       }`}
     >
@@ -74,7 +91,7 @@ const Navbar = () => {
         className={`flex items-center ${!showSearch ? "hidden" : ""} sm:flex`}
       >
         {/* Hamburger Icon */}
-        <div ref={menuRef} className="mr-5 lg:hidden">
+        <div ref={menuRef} className=" lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-xl sm:text-2xl text-gray-900 dark:text-gray-200"
@@ -83,9 +100,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="font-merriweather lg:mx-0 text-xl text-center sm:text-2xl md:text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold  md:tracking-wider">
+        <div className="font-merriweather mx-5 lg:mx-0 text-lg text-center  md:text-2xl lg:text-3xl text-green-700 dark:text-sky-600 font-semibold  md:tracking-wider">
           <NavLink to={"/"} className="cursor-pointer">
-            FOOD RECIPE
+            {title}
           </NavLink>
         </div>
       </div>
@@ -236,7 +253,7 @@ const Navbar = () => {
         >
           <div className="flex items-center relative w-72">
             <FaTimes
-              className="absolute right-9 cursor-pointer text-gray-500 dark:text-gray-300"
+              className="absolute left-60 cursor-pointer text-gray-500 dark:text-gray-300"
               onClick={() => {
                 setSearchParam("");
                 setShowSearch((prevShowSearch) => !prevShowSearch);

@@ -87,15 +87,17 @@ const Signup = () => {
         </div>
       )}
 
-      <div className="flex items-center justify-center mt-4 text-gray-700 dark:text-gray-300">
-        Already a user?{" "}
-        <NavLink
-          to={"/Login"}
-          className="text-green-500 hover:text-green-600 font-bold duration-200 cursor-pointer mx-1"
-        >
-          Login
-        </NavLink>{" "}
-        instead.
+      <div className="flex flex-col items-center justify-center mt-4 text-gray-700 dark:text-gray-300">
+        <div>Already a user? </div>
+        <div>
+          <NavLink
+            to={"/Login"}
+            className="text-green-500 hover:text-green-600 font-bold duration-200 cursor-pointer mx-1"
+          >
+            Login
+          </NavLink>{" "}
+          instead.
+        </div>
       </div>
     </form>
   );

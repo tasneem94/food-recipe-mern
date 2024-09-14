@@ -49,7 +49,7 @@ const UserFavorites = () => {
     return (
       <div className="flex flex-col items-center justify-center mt-20">
         <ReactLoading type="spin" color="#00bfff" height={50} width={50} />
-        <p className="text-xl lg:text-2xl font-bold mt-5">
+        <p className="text-lg sm:text-xl lg:text-2xl font-bold mt-5">
           Loading Favorites... Please wait.
         </p>
       </div>
